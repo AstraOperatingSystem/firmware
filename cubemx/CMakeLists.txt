@@ -5,6 +5,5 @@ target_link_options(${EXECUTABLE} PRIVATE -T ${LINKER_SCRIPT} --specs=nano.specs
 target_sources(cubemx PRIVATE
 	startup_stm32f411xe.s
 )
-add_subdirectory(Drivers)
 add_subdirectory(Core)
-add_subdirectory(Middlewares)
+add_subdirectory(Drivers)

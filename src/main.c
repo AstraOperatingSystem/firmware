@@ -1,9 +1,8 @@
+#include "main.h"
 
+void SystemClock_Config(void);
 
 int main()
 {
-	while (1)
-	{
-		
-	}
+	SystemClock_Config();
 }
