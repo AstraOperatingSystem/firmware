@@ -42,7 +42,7 @@ set(COMPILER_DEFINES ${COMPILER_DEFINES}
 )
 
 # Set compiler args
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${TARGET_FLAGS}") #-Wall -Wextra -fdata-sections -ffunction-sections -O0 -g
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${TARGET_FLAGS}")
 set(CMAKE_ASM_FLAGS "${CMAKE_C_FLAGS}")
 
 # Set linker args

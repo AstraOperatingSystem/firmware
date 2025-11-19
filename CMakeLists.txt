@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.22)
 # ===========================
 
 # Project name for CMake
-set(FW_PROJECT_NAME my_firmware_project)
+set(FW_PROJECT_NAME astra-os-fw)
 
 # Configurations related to 'share'
 set(FW_SHARED_DEPEND_TARGETS "" CACHE STRING "What targets in shared to depend on" FORCE)
@@ -39,16 +39,21 @@ target_compile_options(${EXECUTABLE} PRIVATE
 	-ffunction-sections
 	-fdata-sections
     -g
+	-flto
 )
 target_link_options(${EXECUTABLE} PRIVATE
 	-T ${LINKER_SCRIPT}
 	--specs=nano.specs
 	-Wl,--gc-sections
+	-flto
 )
 
 # Recurse subdirectories
 add_subdirectory(cubemx)
 add_subdirectory(src)
+
+# Add libraries
+target_link_libraries(${EXECUTABLE} PRIVATE cubemx)
 
 # === Flashing and related code ===
 if(USE_ST_FLASH)
