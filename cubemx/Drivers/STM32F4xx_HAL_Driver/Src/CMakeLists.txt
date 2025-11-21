@@ -1,4 +1,4 @@
-target_sources(cubemx PRIVATE
+target_sources(cubemx PUBLIC
 	stm32f4xx_hal_tim.c
 	stm32f4xx_hal_tim_ex.c
 	stm32f4xx_hal_i2c.c

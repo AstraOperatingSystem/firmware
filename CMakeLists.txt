@@ -35,7 +35,7 @@ target_compile_options(${EXECUTABLE} PRIVATE
 	-Wall
 	-Wextra
 	-Wpedantic
-	-Os
+	-O0
 	-ffunction-sections
 	-fdata-sections
     -g
