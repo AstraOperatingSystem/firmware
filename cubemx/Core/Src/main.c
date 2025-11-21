@@ -52,7 +52,6 @@
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 void my_main();
-void my_main();
 
 /* USER CODE END PFP */
 
@@ -99,7 +98,6 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-my_main();
 my_main();
   while (1)
   {
@@ -186,7 +184,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   * @brief  This function is executed in case of error occurrence.
   * @retval None
   */
-__attribute__((weak)) __attribute__((weak)) void Error_Handler(void)
+void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
