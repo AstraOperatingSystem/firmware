@@ -13,7 +13,10 @@ void my_main()
 
 	while (1)
 	{
-		HAL_Delay(500);
-		HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+		HAL_Delay(100);
+
+		GPIO_PinState state0 = HAL_GPIO_ReadPin(BTN0_GPIO_Port, BTN0_Pin);
+		GPIO_PinState state1 = HAL_GPIO_ReadPin(BTN1_GPIO_Port, BTN1_Pin);
+		HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, state0 == state1 ? GPIO_PIN_SET : GPIO_PIN_RESET);
 	}
 }
