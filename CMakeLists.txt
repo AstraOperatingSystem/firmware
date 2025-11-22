@@ -48,12 +48,19 @@ target_link_options(${EXECUTABLE} PRIVATE
 	-flto
 )
 
+# Add search paths
+list(APPEND CMAKE_PREFIX_PATH "${CMAKE_BINARY_DIR}/conan")
+
+# Find needed packages
+find_package(kpi REQUIRED)
+
 # Recurse subdirectories
 add_subdirectory(cubemx)
 add_subdirectory(src)
 
 # Add libraries
 target_link_libraries(${EXECUTABLE} PRIVATE cubemx)
+target_link_libraries(astra-os-fw PRIVATE kpi::kpi)
 
 # === Flashing and related code ===
 if(USE_ST_FLASH)

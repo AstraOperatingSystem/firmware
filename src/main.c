@@ -1,5 +1,7 @@
 #include <stdint.h>
 
+#include <kpi/kpi.h>
+
 #include "main.h"
 #include "gpio.h"
 #include "usart.h"
@@ -8,8 +10,22 @@
 
 void my_main()
 {
+	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+	HAL_Delay(100);
 	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
-	HAL_UART_Transmit(&huart1, "Yo\r\n", 4, 500);
+	HAL_Delay(100);
+	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+	HAL_Delay(100);
+
+	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, kpi_bank_destroy(NULL) != 0 ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	HAL_Delay(1000);
+
+	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+	HAL_Delay(100);
+	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
+	HAL_Delay(100);
+	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+	HAL_Delay(100);
 
 	while (1)
 	{
