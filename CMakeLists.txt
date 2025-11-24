@@ -23,7 +23,7 @@ project(${FW_PROJECT_NAME}
 	VERSION 0.1.0
 	LANGUAGES C ASM)
 
-set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD 23)
 set(CMAKE_C_STANDARD_REQUIRED True)
 
 set(EXECUTABLE ${FW_PROJECT_NAME})
@@ -47,6 +47,9 @@ target_link_options(${EXECUTABLE} PRIVATE
 	-Wl,--gc-sections
 	-flto
 )
+target_compile_definitions(${EXECUTABLE} PRIVATE
+	STM32F411xE
+)
 
 # Add search paths
 list(APPEND CMAKE_PREFIX_PATH "${CMAKE_BINARY_DIR}/conan")
@@ -57,6 +60,7 @@ find_package(kpi REQUIRED)
 # Recurse subdirectories
 add_subdirectory(cubemx)
 add_subdirectory(src)
+add_subdirectory(drivers)
 
 # Add libraries
 target_link_libraries(${EXECUTABLE} PRIVATE cubemx)
