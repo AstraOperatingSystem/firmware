@@ -42,7 +42,7 @@ target_compile_options(${EXECUTABLE} PRIVATE
 	-flto
 )
 target_link_options(${EXECUTABLE} PRIVATE
-	-T ${LINKER_SCRIPT}
+	-T ${PROJECT_SOURCE_DIR}/${LINKER_SCRIPT}
 	--specs=nano.specs
 	-Wl,--gc-sections
 	-flto
@@ -60,7 +60,7 @@ add_subdirectory(src)
 
 # Add libraries
 target_link_libraries(${EXECUTABLE} PRIVATE cubemx)
-target_link_libraries(astra-os-fw PRIVATE kpi::kpi)
+target_link_libraries(${EXECUTABLE} PRIVATE kpi::kpi)
 
 # === Flashing and related code ===
 if(USE_ST_FLASH)

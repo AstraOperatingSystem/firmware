@@ -12,7 +12,7 @@ tools.build:compiler_executables={"c": "arm-none-eabi-gcc","asm": "arm-none-eabi
 tools.build:cflags=["-mcpu=cortex-m4","-mthumb","-mfpu=fpv4-sp-d16","-mfloat-abi=hard"]
 tools.build:exelinkflags=["-mcpu=cortex-m4","-mthumb","-Wl,--gc-sections"]
 tools.build:defines=["STM32F411xE"]
-tools.cmake.cmaketoolchain:extra_variables={"CMAKE_TRY_COMPILE_TARGET_TYPE": "STATIC_LIBRARY"}
+tools.cmake.cmaketoolchain:extra_variables={"CMAKE_TRY_COMPILE_TARGET_TYPE": "STATIC_LIBRARY","LINKER_SCRIPT": "cubemx/STM32F411XX_FLASH.ld"}
 
 [buildenv]
 CC=arm-none-eabi-gcc
