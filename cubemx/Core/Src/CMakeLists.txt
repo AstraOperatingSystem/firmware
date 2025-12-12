@@ -2,6 +2,7 @@ target_sources(cubemx PRIVATE
 	gpio.c
 	i2c.c
 	main.c
+	spi.c
 	stm32f4xx_hal_msp.c
 	stm32f4xx_hal_timebase_tim.c
 	stm32f4xx_it.c

@@ -14,6 +14,7 @@ target_sources(cubemx PRIVATE
 	stm32f4xx_hal_pwr_ex.c
 	stm32f4xx_hal_rcc.c
 	stm32f4xx_hal_rcc_ex.c
+	stm32f4xx_hal_spi.c
 	stm32f4xx_hal_tim.c
 	stm32f4xx_hal_tim_ex.c
 	stm32f4xx_hal_uart.c
