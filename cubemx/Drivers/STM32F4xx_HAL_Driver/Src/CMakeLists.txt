@@ -1,4 +1,4 @@
-target_sources(cubemx PRIVATE
+target_sources(cubemx PUBLIC
 	stm32f4xx_hal.c
 	stm32f4xx_hal_cortex.c
 	stm32f4xx_hal_dma.c

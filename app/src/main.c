@@ -8,9 +8,6 @@
 #include "stm32f4xx_hal_gpio.h"
 #include "stm32f4xx_hal_uart.h"
 
-//stfu
-void _sbrk() {}
-
 
 void my_main()
 {

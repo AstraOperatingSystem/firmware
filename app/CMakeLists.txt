@@ -11,9 +11,6 @@ set(FW_PROJECT_NAME astra-os-fw)
 set(FW_SHARED_DEPEND_TARGETS "" CACHE STRING "What targets in shared to depend on" FORCE)
 set(FW_SHARED_LINK_TARGETS "" CACHE STRING "What targets in shared to link" FORCE)
 
-# Development environment options
-option(USE_ST_FLASH "Whether to include flashing commands in the toolchain" ON)
-
 # =======================================
 # === Project building (do not touch) ===
 # =======================================
@@ -63,18 +60,17 @@ add_subdirectory(drivers)
 target_link_libraries(${EXECUTABLE} PRIVATE cubemx)
 target_link_libraries(${EXECUTABLE} PRIVATE kpi::kpi)
 
-# === Flashing and related code ===
-if(USE_ST_FLASH)
-	find_program(ST_FLASH st-flash)
+# === Flashing and debugging code ===
+find_program(OPENOCD openocd)
+set(OPENOCD_BOARD "board/st_nucleo_f4.cfg")
 
-	add_custom_command(
-		OUTPUT  ${PROJECT_BINARY_DIR}/flash_image.bin
-		DEPENDS ${EXECUTABLE}
-		COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:${EXECUTABLE}> ${PROJECT_BINARY_DIR}/flash_image.bin
-	)
+add_custom_command(
+	OUTPUT  ${PROJECT_BINARY_DIR}/flash_image.bin
+	DEPENDS ${EXECUTABLE}
+	COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:${EXECUTABLE}> ${PROJECT_BINARY_DIR}/flash_image.bin
+)
 
-	add_custom_target(flash_stm
-		DEPENDS ${PROJECT_BINARY_DIR}/flash_image.bin
-		COMMAND ${ST_FLASH} --reset write ${PROJECT_BINARY_DIR}/flash_image.bin 0x08000000
-	)
-endif()
+add_custom_target(flash
+	DEPENDS ${PROJECT_BINARY_DIR}/flash_image.bin
+	COMMAND ${OPENOCD} -f ${OPENOCD_BOARD} -c "program ${PROJECT_BINARY_DIR}/flash_image.bin verify reset exit 0x08000000"
+)

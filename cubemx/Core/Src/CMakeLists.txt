@@ -1,4 +1,4 @@
-target_sources(cubemx PRIVATE
+target_sources(cubemx PUBLIC
 	gpio.c
 	i2c.c
 	main.c
