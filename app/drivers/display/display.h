@@ -15,9 +15,6 @@
 #define DISP_COLS 20
 #define DISP_SIZE (DISP_COLS * DISP_LINES)
 
-#define DISP_I2C0 0
-#define DISP_I2C1 1
-
 #define DISP_CHAR_ARROWR '\x7e'
 #define DISP_CHAR_ARROWL '\x7f'
 #define DISP_CHAR_DOT_HIGH '\xa5'
@@ -33,14 +30,6 @@
 #define DISP_CHAR_PI '\xf8'
 #define DISP_CHAR_DOT_DIV '\xfd'
 #define DISP_CHAR_BLACK '\xff'
-
-#define DISP_CHAR_NOTE '\x01'
-#define DISP_CHAR_LIST '\x02'
-#define DISP_CHAR_SEARCH '\x03'
-#define DISP_CHAR_WIFI '\x04'
-#define DISP_CHAR_BLUETOOTH '\x05'
-#define DISP_CHAR_TERMO '\x06'
-#define DISP_CHAR_SHIFTER '\x07'
 
 typedef struct display_t display_t;
 

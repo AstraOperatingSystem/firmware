@@ -2,38 +2,38 @@
 
 #include <kpi/kpi.h>
 
+#include "display/display.h"
+
 #include "main.h"
 #include "gpio.h"
 #include "usart.h"
+#include "i2c.h"
 #include "stm32f4xx_hal_gpio.h"
 #include "stm32f4xx_hal_uart.h"
 
 
+void keypad_handler(kpi_event_t ev)
+{
+	if (ev.type == KPI_EV_DOUBLE)
+		HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+}
+
 void my_main()
 {
-	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
-	HAL_Delay(100);
-	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
-	HAL_Delay(100);
-	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
-	HAL_Delay(100);
+	//display_t *display = display_init(&hi2c3, 0x27);
 
-	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, kpi_bank_destroy(NULL) != 0 ? GPIO_PIN_SET : GPIO_PIN_RESET);
-	HAL_Delay(1000);
-
-	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
-	HAL_Delay(100);
-	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
-	HAL_Delay(100);
-	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
-	HAL_Delay(100);
+	kpi_bank_t bank;
+	kpi_bank_init_static(&bank, keypad_handler, 2, 500, 500);
 
 	while (1)
 	{
-		HAL_Delay(100);
+		HAL_Delay(1);
 
-		GPIO_PinState state0 = HAL_GPIO_ReadPin(BTN0_GPIO_Port, BTN0_Pin);
-		GPIO_PinState state1 = HAL_GPIO_ReadPin(BTN1_GPIO_Port, BTN1_Pin);
-		HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, state0 == state1 ? GPIO_PIN_SET : GPIO_PIN_RESET);
+		uint32_t btn_mask = 0;
+
+		btn_mask |= HAL_GPIO_ReadPin(BTN0_GPIO_Port, BTN0_Pin) << 0;
+		btn_mask |= HAL_GPIO_ReadPin(BTN1_GPIO_Port, BTN1_Pin) << 1;
+
+		kpi_tick(&bank, btn_mask);
 	}
 }
