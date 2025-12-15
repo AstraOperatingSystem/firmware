@@ -37,7 +37,7 @@ target_compile_options(${EXECUTABLE} PRIVATE
 	-flto
 )
 target_link_options(${EXECUTABLE} PRIVATE
-	-T ${PROJECT_SOURCE_DIR}/${LINKER_SCRIPT}
+	-T ${CMAKE_CURRENT_SOURCE_DIR}/STM32F411XX_FLASH.ld
 	--specs=nano.specs
 	-Wl,--gc-sections
 	-flto
@@ -46,11 +46,11 @@ target_compile_definitions(${EXECUTABLE} PRIVATE
 	STM32F411xE
 )
 
-# Add search paths
-list(APPEND CMAKE_PREFIX_PATH "${CMAKE_BINARY_DIR}")
+# Add CPM (package management)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/CPM.cmake)
 
-# Find needed packages
-find_package(kpi REQUIRED)
+# Add package dependencies
+CPMAddPackage("gh:AstraOperatingSystem/libkpi#cpm_test")
 
 # Recurse subdirectories
 add_subdirectory(src)
@@ -58,7 +58,7 @@ add_subdirectory(drivers)
 
 # Add libraries
 target_link_libraries(${EXECUTABLE} PRIVATE cubemx)
-target_link_libraries(${EXECUTABLE} PRIVATE kpi::kpi)
+target_link_libraries(${EXECUTABLE} PRIVATE kpi) #REVIEW: KPI name here
 
 # === Flashing and debugging code ===
 find_program(OPENOCD openocd)

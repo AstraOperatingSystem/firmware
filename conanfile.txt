@@ -1,6 +1,0 @@
-[requires]
-kpi/[~0]
-
-[generators]
-CMakeDeps
-CMakeToolchain
