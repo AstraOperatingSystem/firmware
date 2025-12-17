@@ -26,10 +26,6 @@ struct display_t
 #define PIN_D6 0b01000000
 #define PIN_D7 0b10000000
 
-//Periods for signal hold //REVIEW: Adjust timings, 1ms worked on NUCLEO board, might be able to maintain pulse and lower cmd
-#define PERIOD_PULSE 1 //FIXME: Was in microseconds, HAL_Delay uses miliseconds (was .5ms)
-#define PERIOD_CMD 4 //FIXME: Was in microseconds, HAL_Delay uses miliseconds (was 4.1ms)
-
 //Display commands
 #define CMD_CLEAR 0x01
 #define CMD_HOME  0x02
@@ -72,17 +68,13 @@ static void write_cmd(I2C_HandleTypeDef *handle, uint16_t addr, unsigned int cmd
 
 	byte = (cmd & 0xF0) | (backlight ? PIN_BL : 0) | PIN_E;
 	HAL_I2C_Master_Transmit(handle, addr, &byte, 1, 9999);
-	HAL_Delay(PERIOD_PULSE);
 	byte &= ~PIN_E;
 	HAL_I2C_Master_Transmit(handle, addr, &byte, 1, 9999);
-	HAL_Delay(PERIOD_CMD);
 
 	byte = ((cmd << 4) & 0xF0) | (backlight ? PIN_BL : 0) | PIN_E;
 	HAL_I2C_Master_Transmit(handle, addr, &byte, 1, 9999);
-	HAL_Delay(PERIOD_PULSE);
 	byte &= ~PIN_E;
 	HAL_I2C_Master_Transmit(handle, addr, &byte, 1, 9999);
-	HAL_Delay(PERIOD_CMD);
 }
 
 static void write_char(I2C_HandleTypeDef *handle, uint16_t addr, char ch, bool backlight)
@@ -91,17 +83,13 @@ static void write_char(I2C_HandleTypeDef *handle, uint16_t addr, char ch, bool b
 
 	byte = (ch & 0xF0) | PIN_RS | (backlight ? PIN_BL : 0) | PIN_E;
 	HAL_I2C_Master_Transmit(handle, addr, &byte, 1, 9999);
-	HAL_Delay(PERIOD_PULSE);
 	byte &= ~PIN_E;
 	HAL_I2C_Master_Transmit(handle, addr, &byte, 1, 9999);
-	HAL_Delay(PERIOD_CMD);
 
 	byte = ((ch << 4) & 0xF0) | PIN_RS | (backlight ? PIN_BL : 0) | PIN_E;
 	HAL_I2C_Master_Transmit(handle, addr, &byte, 1, 9999);
-	HAL_Delay(PERIOD_PULSE);
 	byte &= ~PIN_E;
 	HAL_I2C_Master_Transmit(handle, addr, &byte, 1, 9999);
-	HAL_Delay(PERIOD_CMD);
 }
 
 
@@ -142,7 +130,7 @@ display_t *display_init(I2C_HandleTypeDef *handle, uint16_t addr)
 	write_cmd(ret->handle, ret->address, CMD_DISP | DISP_PWR, ret->backlight);
 	write_cmd(ret->handle, ret->address, CMD_CLEAR, ret->backlight);
 	write_cmd(ret->handle, ret->address, CMD_ENTRY | ENTRY_NORM, ret->backlight);
-	HAL_Delay(200); //REVIEW:
+	HAL_Delay(200); //REVIEW: Why??
 
 	return ret;
 }

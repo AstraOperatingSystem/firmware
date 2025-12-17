@@ -27,7 +27,10 @@ void my_main()
 {
 	display_t *display = display_init(&hi2c3, 0x27 << 1);
 
-	display_write_str(display, "Hello");
+	display_write_str_at(display, "I am worth 20 chars!", 0, 0);
+	display_write_str_at(display, "Worth 40 chars I am!", 1, 0);
+	display_write_str_at(display, "60 chars am I worth?", 2, 0);
+	display_write_str_at(display, "I am worth 80 chars!", 3, 0);
 
 	kpi_bank_t bank;
 	kpi_bank_init_static(&bank, keypad_handler, 2, 400, 200);
