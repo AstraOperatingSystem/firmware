@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 4.2.0)
 
 project(astra-os-firmware VERSION 0.1.0 LANGUAGES C ASM)
 

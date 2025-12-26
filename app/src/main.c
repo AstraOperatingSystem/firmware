@@ -2,6 +2,7 @@
 #include <stdint.h>
 
 #include <kpi/kpi.h>
+#include <uartl/uartl.h>
 
 #include "display/display.h"
 

@@ -7,10 +7,6 @@ cmake_minimum_required(VERSION 3.22)
 # Project name for CMake
 set(FW_PROJECT_NAME astra-os-fw)
 
-# Configurations related to 'share'
-set(FW_SHARED_DEPEND_TARGETS "" CACHE STRING "What targets in shared to depend on" FORCE)
-set(FW_SHARED_LINK_TARGETS "" CACHE STRING "What targets in shared to link" FORCE)
-
 # =======================================
 # === Project building (do not touch) ===
 # =======================================
@@ -50,7 +46,8 @@ target_compile_definitions(${EXECUTABLE} PRIVATE
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/CPM.cmake)
 
 # Add package dependencies
-CPMAddPackage("gh:AstraOperatingSystem/libkpi#cpm_test")
+CPMAddPackage("gh:AstraOperatingSystem/libkpi#master")
+CPMAddPackage("gh:AstraOperatingSystem/libuartl#master")
 
 # Recurse subdirectories
 add_subdirectory(src)
@@ -58,7 +55,8 @@ add_subdirectory(drivers)
 
 # Add libraries
 target_link_libraries(${EXECUTABLE} PRIVATE cubemx)
-target_link_libraries(${EXECUTABLE} PRIVATE kpi) #REVIEW: KPI name here
+target_link_libraries(${EXECUTABLE} PRIVATE kpi)
+target_link_libraries(${EXECUTABLE} PRIVATE uartl)
 
 # === Flashing and debugging code ===
 find_program(OPENOCD openocd)
