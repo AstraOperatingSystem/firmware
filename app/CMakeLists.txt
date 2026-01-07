@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 4.2.1)
 
 # ===========================
 # === Configs and Options ===
@@ -26,6 +26,7 @@ target_compile_options(${EXECUTABLE} PRIVATE
 	-Wall
 	-Wextra
 	-Wpedantic
+	-Wconversion
 	-O0
 	-ffunction-sections
 	-fdata-sections
@@ -48,6 +49,9 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/CPM.cmake)
 # Add package dependencies
 CPMAddPackage("gh:AstraOperatingSystem/libkpi#master")
 CPMAddPackage("gh:AstraOperatingSystem/libuartl#master")
+
+# Add FreeRTOS
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/FreeRTOS.cmake)
 
 # Recurse subdirectories
 add_subdirectory(src)

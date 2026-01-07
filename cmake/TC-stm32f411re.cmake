@@ -27,9 +27,6 @@ set(COMPILER_DEFINES ${COMPILER_DEFINES}
 # CPU architecture for gcc
 set(CMAKE_C_FLAGS_INIT "-mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard")
 
-# Set FreeRTOS options
-set(FREERTOS_PORT "GCC_ARM_CM4" CACHE STRING "" FORCE)
-
 # Set CPU for later conditional compilation
 set(COMPILER_DEFINES ${COMPILER_DEFINES}
 	STM32F411xE
