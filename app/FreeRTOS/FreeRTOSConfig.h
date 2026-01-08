@@ -137,8 +137,7 @@
  *
  * Defining configTICK_TYPE_WIDTH_IN_BITS as TICK_TYPE_WIDTH_64_BITS causes
  * TickType_t to be defined (typedef'ed) as an unsigned 64-bit type. */
-#define configTICK_TYPE_WIDTH_IN_BITS              TICK_TYPE_WIDTH_64_BITS
-//REVIEW: Could be 32?
+#define configTICK_TYPE_WIDTH_IN_BITS              TICK_TYPE_WIDTH_32_BITS
 
 /* Set configIDLE_SHOULD_YIELD to 1 to have the Idle task yield to an
  * application task if there is an Idle priority (priority 0) application task
@@ -222,7 +221,7 @@
  * FreeRTOS/source/timers.c source file must be included in the build if
  * configUSE_TIMERS is set to 1.  Default to 0 if left undefined.  See
  * https://www.freertos.org/RTOS-software-timer.html. */
-#define configUSE_TIMERS                1
+#define configUSE_TIMERS                0
 
 /* configTIMER_TASK_PRIORITY sets the priority used by the timer task.  Only
  * used if configUSE_TIMERS is set to 1.  The timer task is a standard FreeRTOS
@@ -243,7 +242,6 @@
  * https://www.freertos.org/RTOS-software-timer-service-daemon-task.html  Only
  * used if configUSE_TIMERS is set to 1. */
 #define configTIMER_QUEUE_LENGTH        10
-//REVIEW: Study what this is
 
 /******************************************************************************/
 /* Event Group related definitions. *******************************************/
@@ -327,7 +325,7 @@
  * to the highest interrupt priority (0).  Not supported by all FreeRTOS ports.
  * See https://www.freertos.org/RTOS-Cortex-M3-M4.html for information specific
  * to ARM Cortex-M devices. */
-#define configMAX_SYSCALL_INTERRUPT_PRIORITY     0
+#define configMAX_SYSCALL_INTERRUPT_PRIORITY     0x10
 //REVIEW: Study this
 
 /* Another name for configMAX_SYSCALL_INTERRUPT_PRIORITY - the name used depends
@@ -508,7 +506,7 @@
  * than itself. The application writer needs to explicitly grant the
  * unprivileged task access to the kernel objects it needs using the APIs
  * provided for the same. Defaults to 0 if left undefined. */
-#define configENABLE_ACCESS_CONTROL_LIST                          1
+#define configENABLE_ACCESS_CONTROL_LIST                          0
 //REVIEW: Study this
 
 /******************************************************************************/
@@ -582,7 +580,7 @@
  * respectively. The application can provide it's own implementation of
  * vApplicationGetIdleTaskMemory() and vApplicationGetTimerTaskMemory() by
  * setting configKERNEL_PROVIDED_STATIC_MEMORY to 0 or leaving it undefined. */
-#define configKERNEL_PROVIDED_STATIC_MEMORY    1
+#define configKERNEL_PROVIDED_STATIC_MEMORY    0
 
 /******************************************************************************/
 /* ARMv8-M port Specific Configuration definitions. ***************************/

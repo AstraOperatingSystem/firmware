@@ -58,6 +58,7 @@ add_subdirectory(src)
 add_subdirectory(drivers)
 
 # Add libraries
+target_link_libraries(${EXECUTABLE} PRIVATE freertos_kernel)
 target_link_libraries(${EXECUTABLE} PRIVATE cubemx)
 target_link_libraries(${EXECUTABLE} PRIVATE kpi)
 target_link_libraries(${EXECUTABLE} PRIVATE uartl)

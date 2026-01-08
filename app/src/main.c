@@ -4,6 +4,9 @@
 #include <kpi/kpi.h>
 #include <uartl/uartl.h>
 
+#include "FreeRTOS.h"
+#include "task.h"
+
 #include "display/display.h"
 
 #include "main.h"
@@ -18,7 +21,7 @@ void keypad_handler(kpi_event_t ev)
 {
 	char buf[128];
 	int len = sprintf(buf, "%d %d\n", ev.button, ev.type);
-	//HAL_UART_Transmit(&huart1, (uint8_t*)buf, len, 9999);
+	(void)len;//HAL_UART_Transmit(&huart1, (uint8_t*)buf, len, 9999);
 
 	if (ev.type == KPI_EV_SHORT)
 		HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
@@ -40,8 +43,17 @@ int rx(void *serial, void *buf, size_t len, int timeout)
 	return (ret == HAL_OK) ? UARTL_SUCCESS: UARTL_ERR_UNSCPEC;
 }
 
-void my_main()
+#define DISPLAY_TASK_STACK_DEPTH 512
+#define DISPLAY_TASK_PRIORITY 1
+
+StackType_t _display_task_stack[DISPLAY_TASK_STACK_DEPTH];
+StaticTask_t _display_task;
+void display_task_main(void *params)
 {
+	(void)params;
+	
+	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
+
 	display_t *display = display_init(&hi2c3, 0x27 << 1);
 
 	display_write_str_at(display, "I am worth 20 chars!", 0, 0);
@@ -49,6 +61,40 @@ void my_main()
 	display_write_str_at(display, "60 chars am I worth?", 2, 0);
 	display_write_str_at(display, "Damn worth 80 chars!", 3, 0);
 
+	while (1)
+	{
+		
+	}
+
+	vTaskDelete(NULL);
+}
+
+void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer,
+									StackType_t **ppxIdleTaskStackBuffer,
+									size_t *pulIdleTaskStackSize)
+{
+	static StaticTask_t xIdleTaskTCB;
+	static StackType_t uxIdleTaskStack[ configMINIMAL_STACK_SIZE ];
+
+	*ppxIdleTaskTCBBuffer = &xIdleTaskTCB;
+	*ppxIdleTaskStackBuffer = uxIdleTaskStack;
+	*pulIdleTaskStackSize = configMINIMAL_STACK_SIZE;
+}
+
+void vApplicationStackOverflowHook(TaskHandle_t pxTask, char *pcTaskName)
+{
+	while (1);
+}
+
+void my_main()
+{
+	xTaskCreateStatic(display_task_main, "display", DISPLAY_TASK_STACK_DEPTH, NULL, DISPLAY_TASK_PRIORITY, _display_task_stack, &_display_task);
+
+	vTaskStartScheduler();
+}
+
+void tmp_my_main()
+{
 	kpi_bank_t bank;
 	kpi_bank_init_static(&bank, keypad_handler, 2, 400, 200);
 

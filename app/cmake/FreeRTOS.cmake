@@ -9,9 +9,12 @@ FetchContent_Declare(freertos_kernel
 
 add_library(freertos_config INTERFACE)
 
+target_compile_definitions(freertos_config INTERFACE ${definitions})
+target_compile_options(freertos_config INTERFACE ${options})
+
 target_include_directories(freertos_config SYSTEM
 INTERFACE
-  ${CMAKE_CURRENT_SOURCE_DIR}/../FreeRTOS
+  ${CMAKE_CURRENT_SOURCE_DIR}/FreeRTOS
 )
 
 target_compile_definitions(freertos_config
@@ -20,6 +23,11 @@ target_compile_definitions(freertos_config
 )
 
 # Set FreeRTOS port
-set(FREERTOS_PORT "GCC_ARM_CM4_MPU" CACHE STRING "" FORCE)
+set(FREERTOS_PORT "GCC_ARM_CM4F" CACHE STRING "" FORCE)
 
 FetchContent_MakeAvailable(freertos_kernel)
+
+target_compile_options(freertos_kernel PRIVATE -g)
+target_compile_options(freertos_kernel_port PRIVATE -g)
+
+
