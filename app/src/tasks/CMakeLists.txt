@@ -1,5 +1,4 @@
-add_subdirectory(tasks)
-
 target_sources(astra-os-fw PRIVATE
-	main.c
+	tasks.c
+	display_task.c
 )

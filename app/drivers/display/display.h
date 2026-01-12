@@ -1,7 +1,7 @@
 //display.h - Raw control over I2C display hardware
 
-#ifndef DISPLAY_H_
-#define DISPLAY_H_
+#ifndef _DISPLAY_H_
+#define _DISPLAY_H_
 
 #include <stdint.h>
 #include <stdbool.h>
