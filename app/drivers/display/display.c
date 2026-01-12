@@ -63,33 +63,41 @@ struct display_t
 
 
 static void write_cmd(I2C_HandleTypeDef *handle, uint16_t addr, unsigned int cmd, bool backlight)
-{
+{ //TODO: Review delays
 	uint8_t byte;
 
 	byte = (cmd & 0xF0) | (backlight ? PIN_BL : 0) | PIN_E;
 	HAL_I2C_Master_Transmit(handle, addr, &byte, 1, 9999);
+	HAL_Delay(1);
 	byte &= ~PIN_E;
 	HAL_I2C_Master_Transmit(handle, addr, &byte, 1, 9999);
+	HAL_Delay(1);
 
 	byte = ((cmd << 4) & 0xF0) | (backlight ? PIN_BL : 0) | PIN_E;
 	HAL_I2C_Master_Transmit(handle, addr, &byte, 1, 9999);
+	HAL_Delay(1);
 	byte &= ~PIN_E;
 	HAL_I2C_Master_Transmit(handle, addr, &byte, 1, 9999);
+	HAL_Delay(1);
 }
 
 static void write_char(I2C_HandleTypeDef *handle, uint16_t addr, char ch, bool backlight)
-{
+{ //TODO: Review delays
 	uint8_t byte;
 
 	byte = (ch & 0xF0) | PIN_RS | (backlight ? PIN_BL : 0) | PIN_E;
 	HAL_I2C_Master_Transmit(handle, addr, &byte, 1, 9999);
+	HAL_Delay(1);
 	byte &= ~PIN_E;
 	HAL_I2C_Master_Transmit(handle, addr, &byte, 1, 9999);
+	HAL_Delay(1);
 
 	byte = ((ch << 4) & 0xF0) | PIN_RS | (backlight ? PIN_BL : 0) | PIN_E;
 	HAL_I2C_Master_Transmit(handle, addr, &byte, 1, 9999);
+	HAL_Delay(1);
 	byte &= ~PIN_E;
 	HAL_I2C_Master_Transmit(handle, addr, &byte, 1, 9999);
+	HAL_Delay(1);
 }
 
 
