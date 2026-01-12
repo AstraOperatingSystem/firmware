@@ -8,6 +8,7 @@
 #include "task.h"
 
 #include "tasks/display_task.h"
+#include "tasks/heartbeat_task.h"
 
 #include "main.h"
 #include "gpio.h"
@@ -45,6 +46,7 @@ int rx(void *serial, void *buf, size_t len, int timeout)
 void my_main()
 {
 	xTaskCreateStatic(display_task_main, "display", DISPLAY_TASK_STACK_DEPTH, NULL, DISPLAY_TASK_PRIORITY, _display_task_stack, &_display_task);
+	xTaskCreateStatic(heartbeat_task_main, "heartbeat", HEARTBEAT_TASK_STACK_DEPTH, NULL, HEARTBEAT_TASK_PRIORITY, _heartbeat_task_stack, &_heartbeat_task);
 
 	vTaskStartScheduler();
 }

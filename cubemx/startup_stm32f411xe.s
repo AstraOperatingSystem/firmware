@@ -139,7 +139,7 @@ g_pfnVectors:
   .word  DebugMon_Handler
   .word  0
   .word  xPortPendSVHandler
-  .word  SysTick_Handler
+  .word  xPortSysTickHandler
   
   /* External Interrupts */
   .word     WWDG_IRQHandler                   /* Window WatchDog              */                                        
