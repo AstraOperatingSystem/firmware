@@ -1,4 +1,4 @@
-#include "display/display.h"
+#include "display/display_driver.h"
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -17,14 +17,14 @@ struct display_t
 
 
 //Bit mask for display pins
-#define PIN_E  0b00000100
-#define PIN_RW 0b00000010
-#define PIN_RS 0b00000001
-#define PIN_BL 0b00001000
-#define PIN_D4 0b00010000
-#define PIN_D5 0b00100000
-#define PIN_D6 0b01000000
-#define PIN_D7 0b10000000
+#define PIN_E  ((uint8_t)0b00000100u)
+#define PIN_RW ((uint8_t)0b00000010u)
+#define PIN_RS ((uint8_t)0b00000001u)
+#define PIN_BL ((uint8_t)0b00001000u)
+#define PIN_D4 ((uint8_t)0b00010000u)
+#define PIN_D5 ((uint8_t)0b00100000u)
+#define PIN_D6 ((uint8_t)0b01000000u)
+#define PIN_D7 ((uint8_t)0b10000000u)
 
 //Display commands
 #define CMD_CLEAR 0x01
@@ -69,14 +69,14 @@ static void write_cmd(I2C_HandleTypeDef *handle, uint16_t addr, unsigned int cmd
 	byte = (cmd & 0xF0) | (backlight ? PIN_BL : 0) | PIN_E;
 	HAL_I2C_Master_Transmit(handle, addr, &byte, 1, 9999);
 	HAL_Delay(1);
-	byte &= ~PIN_E;
+	byte &= (uint8_t)~PIN_E;
 	HAL_I2C_Master_Transmit(handle, addr, &byte, 1, 9999);
 	HAL_Delay(1);
 
 	byte = ((cmd << 4) & 0xF0) | (backlight ? PIN_BL : 0) | PIN_E;
 	HAL_I2C_Master_Transmit(handle, addr, &byte, 1, 9999);
 	HAL_Delay(1);
-	byte &= ~PIN_E;
+	byte &= (uint8_t)~PIN_E;
 	HAL_I2C_Master_Transmit(handle, addr, &byte, 1, 9999);
 	HAL_Delay(1);
 }
@@ -88,14 +88,14 @@ static void write_char(I2C_HandleTypeDef *handle, uint16_t addr, char ch, bool b
 	byte = (ch & 0xF0) | PIN_RS | (backlight ? PIN_BL : 0) | PIN_E;
 	HAL_I2C_Master_Transmit(handle, addr, &byte, 1, 9999);
 	HAL_Delay(1);
-	byte &= ~PIN_E;
+	byte &= (uint8_t)~PIN_E;
 	HAL_I2C_Master_Transmit(handle, addr, &byte, 1, 9999);
 	HAL_Delay(1);
 
 	byte = ((ch << 4) & 0xF0) | PIN_RS | (backlight ? PIN_BL : 0) | PIN_E;
 	HAL_I2C_Master_Transmit(handle, addr, &byte, 1, 9999);
 	HAL_Delay(1);
-	byte &= ~PIN_E;
+	byte &= (uint8_t)~PIN_E;
 	HAL_I2C_Master_Transmit(handle, addr, &byte, 1, 9999);
 	HAL_Delay(1);
 }

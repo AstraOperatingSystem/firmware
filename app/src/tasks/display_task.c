@@ -1,6 +1,6 @@
 #include "display_task.h"
 
-#include "display/display.h"
+#include "display/display_driver.h"
 #include "display/display_chars.h"
 #include "i2c.h"
 

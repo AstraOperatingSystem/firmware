@@ -15,5 +15,7 @@ void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer,
 
 void vApplicationStackOverflowHook(TaskHandle_t pxTask, char *pcTaskName)
 {
+	(void)pxTask;
+	(void) pcTaskName;
 	while (1); //TODO: Better handling (external feedback?)
 }
