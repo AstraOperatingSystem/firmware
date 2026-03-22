@@ -11,7 +11,7 @@
 			"displayName": "Default Config",
 			"generator": "Ninja",
 			"binaryDir": "${sourceDir}/build",
-			"toolchainFile": "cmake/TC-stm32f411re.cmake"
+			"toolchainFile": "cmake/TC-stm32f412zq.cmake"
 		}
 	],
 	"buildPresets": [
