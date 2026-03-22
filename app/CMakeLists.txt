@@ -50,9 +50,13 @@ CPMAddPackage("gh:AstraOperatingSystem/libuartl#master")
 # Add FreeRTOS
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/FreeRTOS.cmake)
 
+# Add INCP
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/incp.cmake)
+
 # Recurse subdirectories
 add_subdirectory(src)
 add_subdirectory(drivers)
+add_subdirectory(incp)
 
 # Add libraries
 target_link_libraries(${EXECUTABLE} PRIVATE freertos_kernel)

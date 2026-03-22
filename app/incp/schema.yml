@@ -1,0 +1,10 @@
+modules:
+  - name: module_a
+    enums: []
+    variables:
+      - name: var_a
+        doc: Variable a
+        type: I32
+    reports: []
+    commands: []
+    events: []
