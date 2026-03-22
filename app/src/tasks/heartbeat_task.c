@@ -20,8 +20,8 @@ void heartbeat_task_main(void *params)
 	while (1)
 	{
 		xTaskDelayUntil(&last_wake, 298);
-		HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);
 		xTaskDelayUntil(&last_wake, 2);
-		HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET);
 	}
 }

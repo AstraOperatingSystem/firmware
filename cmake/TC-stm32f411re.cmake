@@ -29,5 +29,5 @@ set(CMAKE_C_FLAGS_INIT "-mthumb -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=ha
 
 # Set CPU for later conditional compilation
 set(COMPILER_DEFINES ${COMPILER_DEFINES}
-	STM32F411xE
+	STM32F412Zx
 )

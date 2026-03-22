@@ -1,4 +1,4 @@
-target_sources(cubemx PUBLIC
+target_sources(cubemx PRIVATE
 	stm32f4xx_hal.c
 	stm32f4xx_hal_cortex.c
 	stm32f4xx_hal_dma.c
@@ -14,7 +14,6 @@ target_sources(cubemx PUBLIC
 	stm32f4xx_hal_pwr_ex.c
 	stm32f4xx_hal_rcc.c
 	stm32f4xx_hal_rcc_ex.c
-	stm32f4xx_hal_spi.c
 	stm32f4xx_hal_tim.c
 	stm32f4xx_hal_tim_ex.c
 	stm32f4xx_hal_uart.c

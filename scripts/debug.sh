@@ -6,7 +6,7 @@ case "$1" in
     openocd -f board/st_nucleo_f4.cfg
     ;;
   gdb)
-    arm-none-eabi-gdb build/conan/app/astra-os-fw \
+    arm-none-eabi-gdb build/app/astra-os-fw \
       -ex "target remote :3333"
     ;;
 esac

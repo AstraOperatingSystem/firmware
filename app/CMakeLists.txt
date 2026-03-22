@@ -34,13 +34,10 @@ target_compile_options(${EXECUTABLE} PRIVATE
 	-flto
 )
 target_link_options(${EXECUTABLE} PRIVATE
-	-T ${CMAKE_CURRENT_SOURCE_DIR}/STM32F411XX_FLASH.ld
+	-T ${CMAKE_CURRENT_SOURCE_DIR}/STM32F412XX_FLASH.ld
 	--specs=nano.specs
 	-Wl,--gc-sections
 	-flto
-)
-target_compile_definitions(${EXECUTABLE} PRIVATE
-	STM32F411xE
 )
 
 # Add CPM (package management)

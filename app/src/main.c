@@ -16,6 +16,8 @@
 #include "stm32f4xx_hal_gpio.h"
 #include "stm32f4xx_hal_uart.h"
 
+#include "stm32f4xx_hal_gpio.h"
+
 
 void keypad_handler(kpi_event_t ev)
 {
@@ -58,7 +60,7 @@ void tmp_my_main()
 
 	uartl_handle_t uartl;
 	char uartl_buf[32];
-	uartl_init_static(&uartl, &huart1, tx, rx, uartl_buf, sizeof(uartl_buf));
+	uartl_init_static(&uartl, &huart2, tx, rx, uartl_buf, sizeof(uartl_buf));
 	uartl_connect(&uartl, 1000);
 
 	while (1)
@@ -67,8 +69,8 @@ void tmp_my_main()
 
 		uint32_t btn_mask = 0;
 
-		btn_mask |= (1 - HAL_GPIO_ReadPin(BTN0_GPIO_Port, BTN0_Pin)) << 0;
-		btn_mask |= (1 - HAL_GPIO_ReadPin(BTN1_GPIO_Port, BTN1_Pin)) << 1;
+		//btn_mask |= (1 - HAL_GPIO_ReadPin(BTN0_GPIO_Port, BTN0_Pin)) << 0;
+		//btn_mask |= (1 - HAL_GPIO_ReadPin(BTN1_GPIO_Port, BTN1_Pin)) << 1;
 
 		kpi_tick(&bank, btn_mask);
 	}
