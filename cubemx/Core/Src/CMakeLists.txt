@@ -1,12 +1,18 @@
 target_sources(cubemx PRIVATE
+	adc.c
+	can.c
 	gpio.c
 	i2c.c
 	main.c
+	quadspi.c
+	rtc.c
+	spi.c
 	stm32f4xx_hal_msp.c
 	stm32f4xx_hal_timebase_tim.c
 	stm32f4xx_it.c
 	syscalls.c
 	sysmem.c
 	system_stm32f4xx.c
+	tim.c
 	usart.c
 )

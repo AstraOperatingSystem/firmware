@@ -1,5 +1,8 @@
 target_sources(cubemx PRIVATE
 	stm32f4xx_hal.c
+	stm32f4xx_hal_adc.c
+	stm32f4xx_hal_adc_ex.c
+	stm32f4xx_hal_can.c
 	stm32f4xx_hal_cortex.c
 	stm32f4xx_hal_dma.c
 	stm32f4xx_hal_dma_ex.c
@@ -12,8 +15,12 @@ target_sources(cubemx PRIVATE
 	stm32f4xx_hal_i2c_ex.c
 	stm32f4xx_hal_pwr.c
 	stm32f4xx_hal_pwr_ex.c
+	stm32f4xx_hal_qspi.c
 	stm32f4xx_hal_rcc.c
 	stm32f4xx_hal_rcc_ex.c
+	stm32f4xx_hal_rtc.c
+	stm32f4xx_hal_rtc_ex.c
+	stm32f4xx_hal_spi.c
 	stm32f4xx_hal_tim.c
 	stm32f4xx_hal_tim_ex.c
 	stm32f4xx_hal_uart.c

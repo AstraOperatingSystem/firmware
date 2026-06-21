@@ -12,6 +12,14 @@
 			"generator": "Ninja",
 			"binaryDir": "${sourceDir}/build",
 			"toolchainFile": "cmake/TC-stm32f412zq.cmake"
+		},
+		{
+			"name": "with-asn1scc",
+			"displayName": "With ASN1SCC",
+			"inherits": "default",
+			"cacheVariables": {
+				"ASN1SCC": "/opt/asn1scc/asn1scc"
+			}
 		}
 	],
 	"buildPresets": [

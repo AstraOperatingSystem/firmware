@@ -20,7 +20,7 @@ void display_task_main(void *params)
 {
 	(void)params;
 
-	display_t *display = display_init(&hi2c1, 0x27 << 1);
+	display_t *display = display_init(&hi2c2, 0x27 << 1);
 	vTaskDelay(5);
 
 	program_chars(display);
