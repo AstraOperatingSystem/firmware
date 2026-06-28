@@ -1,4 +1,5 @@
 add_subdirectory(tasks)
+add_subdirectory(drivers)
 
 target_sources(astra-os-fw PRIVATE
 	main.c

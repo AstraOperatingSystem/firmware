@@ -55,7 +55,6 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/incp.cmake)
 
 # Recurse subdirectories
 add_subdirectory(src)
-add_subdirectory(drivers)
 add_subdirectory(incp)
 
 # Add libraries
